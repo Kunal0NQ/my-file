@@ -80,7 +80,30 @@ def LoginUser(request):
             message = "User doesn't exist"
             return render(request,"app/login.html",{'msg':message})
 
-def ProfilePage(request):
-    return render(request,"app/profile.html")
+def ProfilePage(request,pk):
+    if pk:
+        user = UserMaster.objects.get(pk=pk)
+        can = Candidate.objects.get(user_id=user)
+        return render(request,"app/profile.html",{'user':user,'can':can})
                 
-
+def UpdateProfile(request,pk):
+    user = UserMaster.objects.get(pk=pk)
+    if user.role == "Candidate":
+        can = Candidate.objects.get(user_id=user)
+        can.state          = request.POST['state']# fristcountry belong to database and secondcountry belog to html field
+        can.city           = request.POST['city']
+        can.jobtype        = request.POST['jobtype']
+        can.jobcategory    = request.POST['jobcategory']
+        can.highestedu     = request.POST['highestedu']
+        can.experience     = request.POST['experience']
+        can.website        = request.POST['website']
+        can.shift          = request.POST['shift']
+        can.jobdescription = request.POST['jobdescription']
+        can.min_salary     = request.POST['min_salary']
+        can.max_salary     = request.POST['max_salary']
+        can.contact        = request.POST['contact']
+        can.gender         = request.POST['gender']
+        can.profile_pic    = request.POST['profile_pic']
+        can.save()
+        url = f'/profile/{pk}' # Formatting URL
+        return redirect(url)

@@ -165,7 +165,7 @@
                     <li class="has-submenu">
                         <a href="javascript:void(0)">{{request.session.firstname}} {{request.session.lastName}}</a><span class="menu-arrow"></span>
                         <ul class="submenu">
-                            <li><a href="job-list.html">Profile</a></li>
+                            <li><a href="{% url 'profile' pk=request.session.id  %}">Profile</a></li>
                             <li><a href="job-grid.html">Log Out</a></li>  
                         </ul>
                     </li>
