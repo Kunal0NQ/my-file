@@ -63,7 +63,7 @@
                 </div>
                 <div class="float-right">
                     <ul class="topbar-list list-unstyled d-flex" style="margin: 11px 0px;">
-                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>Benny Simpson</a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i> {{request.session.firstname}} {{request.session.lastName}} </a></li>
                         <li class="list-inline-item">
                             <select id="select-lang" class="demo-default">
                                 <option value="">Language</option>
@@ -85,13 +85,13 @@
             <!-- Logo container-->
             <div>
                 <a href="index.html" class="logo">
-                    <img src="images/logo-light.png" alt="" class="logo-light" height="18" />
-                    <img src="images/logo-dark.png" alt="" class="logo-dark" height="18" />
+                    <img src="{% static '/images/logo-light.png' %}" alt="" class="logo-light" height="18" />
+                    <img src="{% static '/images/logo-dark.png' %}" alt="" class="logo-dark" height="18" />
                 </a>
             </div>                 
-            <div class="buy-button">
+            <!-- <div class="buy-button">
                 <a href="post-a-job.html" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Job</a>
-            </div><!--end login button-->
+            </div>end login button -->
             <!-- End Logo container-->
             <div class="menu-extras">
                 <div class="menu-item">
@@ -161,6 +161,13 @@
                     </li>
                     <li>
                         <a href="contact.html">contact</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void(0)">{{request.session.firstname}} {{request.session.lastName}}</a><span class="menu-arrow"></span>
+                        <ul class="submenu">
+                            <li><a href="job-list.html">Profile</a></li>
+                            <li><a href="job-grid.html">Log Out</a></li>  
+                        </ul>
                     </li>
                 </ul><!--end navigation menu-->
             </div><!--end navigation-->

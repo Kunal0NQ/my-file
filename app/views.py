@@ -66,16 +66,21 @@ def LoginUser(request):
         user = UserMaster.objects.get(email=email)
         if user:
             if user.password==password and user.role=="Candidate":
-                can = Candidate.object.get(user_id=user)
+                can = Candidate.objects.get(user_id=user)
                 request.session['id'] = user.id
                 request.session['role'] = user.role
-                request.session['firstname'] = user.firstname
-                request.session['lastName'] = user.lastName
+                request.session['firstname'] = can.firstname
+                request.session['lastName'] = can.lastName
                 request.session['email'] = user.email
                 return redirect('index')
             else:
-                message ="Password doesnot match"
+                message ="Password doesn't match"
                 return render(request,"app/login.html",{'msg':message})
         else:
-            message = "User not found"
+            message = "User doesn't exist"
+            return render(request,"app/login.html",{'msg':message})
+
+def ProfilePage(request):
+    return render(request,"app/profile.html")
+                
 
